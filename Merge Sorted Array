@@ -1,0 +1,113 @@
+What is decreasing order?
+A sequence is in non-decreasing order if each number is greater than or equal to the one before it.
+This definition relaxes the strictness found in increasing order by allowing consecutive numbers to be equal.
+The critical point here is the allowance for equality, ensuring that the sequence does not descend but can maintain a steady level before possibly ascending again.
+A perfect illustration of a non-decreasing sequence is 5, 8, 8, 13, where the sequence does not decrease at any point, although it plateaus at 8.
+
+What is Increasing order?
+A sequence of numbers is said to be in increasing order when each number is strictly greater than the one preceding it. 
+This means that no two consecutive numbers in the sequence can be the same; each must be larger than the previous. 
+The emphasis here is on the word “strictly,” which indicates that the progression must always ascend without repetition.
+
+For example, the sequence 3, 7, 11, 18 is in increasing order. 
+Each number moves up without any plateaus. 
+However, the moment we encounter a sequence like 3, 7, 7, 18, the criteria for increasing order are violated because the sequence does not strictly ascend (due to the repetition of 7).
+
+There are two arrays nums1 and nums2
+m and n is the size of the arrays.
+n is the size of nums2 array.
+m + n is the size of nums1 array.
+upto m-1 there are non - zero numeric characters in nums1 array.
+from m there are zero in nums1.
+
+result should be merge array which is stored in nums1.
+and order should be non-decreasing order.
+
+
+********************************************Solution*************************************************************
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+
+import java.util.*;
+import java.util.Arrays;
+class HelloWorld {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+   for (int j = 0, i = m; j < n; j++) {
+            nums1[i] = nums2[j];
+            i++;
+        }
+      //  Arrays.sort(nums1);
+      for(int c=0;c<m+n-1;c++){
+          for(int b = c+1; b<m+n;b++){
+              if(nums1[c]>nums1[b]){
+              int temp = nums1[c];
+              nums1[c] = nums1[b];
+              nums1[b] = temp;
+              }
+          }
+      }
+ 
+        System.out.println("Here the sorted array: ");
+        for(int l=0;l<m+n;l++){
+            System.out.println(nums1[l]);
+        }
+            
+        }
+        
+    
+    public static void main(String [] args){
+        Scanner mc = new Scanner(System.in);
+        HelloWorld k = new HelloWorld();
+        System.out.println("Enter the value of m");
+        int m = mc.nextInt();
+        System.out.println("Enter the value of n");
+        int n = mc.nextInt();
+        System.out.println("Enter the elements of first array: ");
+        int[] arr1 = new int[m+n];
+        for(int i =0;i<m+n;i++){
+            arr1[i] = mc.nextInt();
+            
+        }
+        System.out.println("Enter the elements of second array: ");
+        int[] arr2 = new int[n];
+      //  Scanner mc = new Scanner(System.in);
+    //    Solution nw = new Solution();
+       for(int j=0;j<n;j++){
+            arr2[j] = mc.nextInt();
+        }
+k.merge(arr1, m, arr2, n);
+
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Orginal problem statement
+
+You are given two integer arrays nums1 and nums2, sorted in non-decreasing order, and two integers m and n, representing the number of elements in nums1 and nums2 respectively.
+
+Merge nums1 and nums2 into a single array sorted in non-decreasing order.
+
+The final sorted array should not be returned by the function, but instead be stored inside the array nums1. To accommodate this, nums1 has a length of m + n, where the first m elements denote the elements that should be merged, and the last n elements are set to 0 and should be ignored. nums2 has a length of n.
+
+ 
+
+Example 1:
+
+Input: nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
+Output: [1,2,2,3,5,6]
+Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
+The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1.
+Example 2:
+
+Input: nums1 = [1], m = 1, nums2 = [], n = 0
+Output: [1]
+Explanation: The arrays we are merging are [1] and [].
+The result of the merge is [1].
+Example 3:
+
+Input: nums1 = [0], m = 0, nums2 = [1], n = 1
+Output: [1]
+Explanation: The arrays we are merging are [] and [1].
+The result of the merge is [1].
+Note that because m = 0, there are no elements in nums1. The 0 is only there to ensure the merge result can fit in nums1.
